@@ -1,38 +1,55 @@
-import { useReducer } from "react"
+import { useState } from "react"
+import { AuctionItem } from "./AuctionItem";
+import './css/auction-items-list.css'
 
-
-let auctionItems = [
-    {"id": 1,"name" : "vessel" , "start-bid": 1000,
-     "current-bid":1000, "bid-person":""},
-     {"id": 2,"name" : "Pot" , "start-bid": 2000,
-     "current-bid":2000, "bid_person":""},
-]
-
-type actionArg ={
-    id : number;
-    bid : number;
-    bid_person : string
+let auctionItems = {
+    1:{"id": 1,"name" : "vessel" , "start_bid": 1000,
+     "current_bid":1000, "bid_person":""},
+     2:{"id": 2,"name" : "Pot" , "start_bid": 2000,
+     "current_bid":2000, "bid_person":""},
 }
 
-const reducer = (state : {}[], action : actionArg) =>{
-    
-    switch(action.id){
+type mapArgs = {
 
-
-        default : return state
-    }
+    id : number
+    name : string
+    start_bid : number
+    current_bid : number
+    bid_person : string 
 }
 
 export const AuctionItems = () =>{
 
+    let [itemDetails, setItemDetails] = useState(auctionItems)
 
+    const selected = (selectedItem :mapArgs) =>{
 
-    let [itemDetails, itemDispatch] = useReducer(reducer,AuctionItems)
+            //let id = selectedItem.id
+            // setItemDetails(()=>{
+            //     let temp = itemDetails.1
+            // })
+           //     selectedItem.current_bid += 10
+           
+
+           //let prev =  Object.assign({},itemDetails)
+           selectedItem.current_bid +=1
+        //    let updated = {selectedItem.id : }
+        //    Objects.assign
+            let newDuplicate = Object.assign({},itemDetails)
+
+           setItemDetails(newDuplicate)
+           console.log(selectedItem,itemDetails)
+
+    }
 
     return(
         <div className = "auction-items-list">
 
-                
+            {Object.values(itemDetails).map((item : mapArgs) => {
+                return <AuctionItem key = {item.id} selected = {selected} item = {item}/>
+            })}
+            
         </div>
     )
 }
+// 

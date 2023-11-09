@@ -1,0 +1,8 @@
+
+.auction-items-list{
+    display:flex;
+    column-gap:20px;
+    margin-inline:auto;
+    margin-top:20px;
+    width:fit-content;
+}
