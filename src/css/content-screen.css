@@ -1,0 +1,24 @@
+
+.message-screen{
+    background: linear-gradient(to top left,rgba(20,100,20,.5),rgba(255,255,255,0.4));
+    height:10vh;
+    width:fit-content;
+    margin-inline:auto;
+    padding:10px;
+    margin-top:10px;
+    display:flex;
+    flex-direction: column;
+    border-radius:10px;
+    justify-content: center;
+    position: fixed;
+    bottom:20px;
+    right:20px;
+}
+
+.message-screen.hide{
+    display:none;
+}
+
+.message{
+    color:black;
+}

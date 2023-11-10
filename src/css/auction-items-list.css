@@ -6,3 +6,37 @@
     margin-top:20px;
     width:fit-content;
 }
+
+.auction-items-container h2{
+    text-align: center;
+    color:lavender;
+    font-size:52px;
+    letter-spacing: 1px;
+}
+
+.bid-form{
+    display:flex;
+    flex-direction:column;
+    width:fit-content;
+    row-gap:10px;
+    position: fixed;
+    border-radius:10px;
+    bottom:10vh;
+    left:50%;
+    transform: translateX(-50%);
+    padding:30px;
+    background-color: lavender;
+}
+
+.bid-form >*{
+    border:none;
+    outline:none;
+    height:3vh;
+    background-color: white;
+    border-radius:10px;
+    color: grey;
+}
+
+input::placeholder{
+    text-align: center;
+}

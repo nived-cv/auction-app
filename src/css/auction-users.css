@@ -1,0 +1,15 @@
+
+
+.user-list{
+    position: absolute;
+    right:10px;
+    top:10%;
+}
+
+.user-list select{
+    padding:10px;
+    background-color: rebeccapurple;
+    color:white;
+    border-radius:10px;
+    border:none;
+}
