@@ -1,6 +1,6 @@
 
 .message-screen{
-    background: linear-gradient(to top left,rgba(20,100,20,.5),rgba(255,255,255,0.4));
+    background: linear-gradient(to top left,lavender,aliceblue);
     height:10vh;
     width:fit-content;
     margin-inline:auto;

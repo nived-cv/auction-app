@@ -109,6 +109,8 @@ export const AuctionItems = ({props,Messagepass}:propstype) => {
 
             </div>
             
+            <p className="users-in-bid">Users in Bid : {selectedItem?.current_users.map((item => {return <span>{item.name}</span>}))}</p>
+
             <div className = "bid-form">
                 <input type = "number" min={selectedItem?.current_bid} ref = {amountObj} placeholder={String(selectedItem?.current_bid)}/>
                 
@@ -119,7 +121,6 @@ export const AuctionItems = ({props,Messagepass}:propstype) => {
                 onClick = {()=> handleUsers() } disabled={ typeof props.name === "string" ? false : true}/>
             </div>
 
-            <span>{selectedItem?.current_users.map((item => {return <span>{item.name}</span>}))}</span>
         </div>
     )
 }
