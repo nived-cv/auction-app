@@ -28,14 +28,18 @@ export const AuctionUsers = ({passCurrentUser}:args) =>{
        passCurrentUser(currentUser)
     }
 
-    return(<div className = "user-list">
+    return(
+    
+    <div className = "user-container">
+        <div className = "user-list">
 
-        <select onClick={selectUser} ref = {refObj} >
+            <select onClick={selectUser} ref = {refObj} >
 
-            {userList.map((user) =>{
-                return <option value = {user.id}> {user.name}</option>
-            })}
-        </select>
-
-    </div>)
+                {userList.map((user) =>{
+                    return <option value = {user.id}> {user.name}</option>
+                })}
+            </select>
+        </div>
+    </div>    
+    )
 }

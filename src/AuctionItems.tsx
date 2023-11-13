@@ -26,16 +26,21 @@ type User = {
 type propstype = {
     props : User
     Messagepass : (message:string)=>void
+    notify: (bidder:string,message:string) => void
 }
 
-export const AuctionItems = ({props,Messagepass}:propstype) => {
+export const AuctionItems = ({props,Messagepass,notify}:propstype) => {
 
     let [itemDetails, setItemDetails] = useState(auctionItems)
     let [selectedItem,setSelectedItem] = useState<null | mapArgs>(null)
     const amountObj = useRef<HTMLInputElement>(null)
+    const bidForm = useRef<HTMLDivElement>(null)
 
     // making a state variable to store the details of selected item
-    const selected = (selectedItem: mapArgs) => setSelectedItem(selectedItem)
+    const selected = (selectedItem: mapArgs) => {
+        setSelectedItem(selectedItem)
+        bidForm.current!.classList.remove('hide')
+    }
     
     const bidEnd = (details : mapArgs) =>{
 
@@ -86,7 +91,8 @@ export const AuctionItems = ({props,Messagepass}:propstype) => {
                         let new_arr = [...itemDetails]
                         setItemDetails(new_arr)
 
-                        Messagepass(`${props.name} bid ${value}`)
+                        //Messagepass(`you bid ${value}`)
+                        notify(props.name,`bid ${value}`)
                         amountObj.current!.value = ''
                     }
                 }
@@ -111,7 +117,7 @@ export const AuctionItems = ({props,Messagepass}:propstype) => {
             
             <p className="users-in-bid">Users in Bid : {selectedItem?.current_users.map((item => {return <span>{item.name}</span>}))}</p>
 
-            <div className = "bid-form">
+            <div className = "bid-form hide" ref = {bidForm}>
                 <input type = "number" min={selectedItem?.current_bid} ref = {amountObj} placeholder={String(selectedItem?.current_bid)}/>
                 
                 <input className="btn" type ="button" value="Bid" 

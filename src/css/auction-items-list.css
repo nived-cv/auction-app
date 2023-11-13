@@ -28,6 +28,10 @@
     background-color: lavender;
 }
 
+.bid-form.hide{
+    display:none;
+}
+
 .bid-form >*{
     border:none;
     outline:none;
@@ -58,4 +62,30 @@ input::placeholder{
 }
 .users-in-bid span:after{
     content: ','
+}
+
+.notification{
+    position: absolute;
+    left:10px;
+    top:10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: mintcream;
+    padding:15px;
+    border-radius:10px;
+}
+.notifications::-webkit-scrollbar{
+    display: none;
+}
+
+.notifications{
+
+    max-height: 100px;
+    overflow-y: scroll;
+    padding-left: 15%;
+}
+.notification li{
+    margin-top:3px;
+    white-space: nowrap;
 }
