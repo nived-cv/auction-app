@@ -2,13 +2,19 @@
 import './css/auction-item.css'
 import { useRef } from 'react'
 
+type User = {
+    id:number
+    name:string
+    notifications : {name:string,message:string}[]
+}
+
 type mapArgs = {
 
     id: number
     name: string
     current_bid: number
     bid_person: string | null
-    current_users : {id: number, name : string}[]
+    current_users : User[]
     sold : boolean
 }
 
@@ -17,7 +23,7 @@ type props = {
         name: string
         current_bid: number
         bid_person: string | null
-        current_users : {id: number, name : string}[]
+        current_users : User[]
         sold:boolean
     }
     selected : (e : mapArgs) => void
@@ -36,7 +42,7 @@ export const AuctionItem = ({item,selected}: props) =>{
             <p>Name : {item.name}</p>
             <p>Bidding for : {item.current_bid}</p>
             <p>bid by : {item.bid_person}</p>
-
+            <p>in bid : {item.current_users?.map((person) => person.name + ',')} </p>
     </div>
     )
 }

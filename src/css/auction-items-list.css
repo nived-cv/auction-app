@@ -37,25 +37,14 @@
     color: grey;
 }
 
+.bid-form.hide{
+    display:none;
+}
+
 input::placeholder{
     text-align: center;
 }
 
 .btn:disabled{
     background-color: rgba(255,255,255,0.3);
-}
-
-.users-in-bid{
-
-    position: relative;
-    width:fit-content;
-    left: 3%;
-    color: slategrey;
-}
-
-.users-in-bid span{
-    margin-left:10px;
-}
-.users-in-bid span:after{
-    content: ','
 }
