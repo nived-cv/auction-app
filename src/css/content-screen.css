@@ -22,3 +22,30 @@
 .message{
     color:black;
 }
+
+
+
+.user-list{
+    position: absolute;
+    right:10px;
+    top:10%;
+    display:flex;
+    flex-direction: column;
+    row-gap:10px;
+}
+
+.user-list select{
+    padding:10px;
+    background-color: rebeccapurple;
+    color:white;
+    border-radius:10px;
+    border:none;
+}
+
+.user-list button{
+    padding:10px;
+    background-color: rebeccapurple;
+    color:white;
+    border-radius:10px;
+    border:none;
+}

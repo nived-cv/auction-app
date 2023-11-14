@@ -106,6 +106,13 @@ export const ContentScreen = () => {
         }, 2500)
     }
 
+    const resetAuction = () =>{
+
+        localStorage.clear()
+        setAuctionitems([])
+        setUsers([])
+    }
+
     useEffect(() => {
 
         let auction_items = getData("auction_items")!
@@ -133,6 +140,7 @@ export const ContentScreen = () => {
                         return <option value={user.id}> {user.name}</option>
                     })}
                 </select>
+                <button onClick = {resetAuction}> Reset Auction</button>
             </div>
 
             <MessageContext.Provider value={{displayMessage, setData}}>
