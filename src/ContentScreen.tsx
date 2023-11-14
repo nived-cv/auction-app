@@ -23,6 +23,7 @@ type mapArgs = {
 
 type contextType = {
     displayMessage : (message : string) => void
+    setData : (key : string, value : {}[]) => void
 }
 
 let auctionItems = [
@@ -30,10 +31,28 @@ let auctionItems = [
     { "id": 2, "name": "Pot", "current_bid": 2000, "bid_person": null, "current_users": [], "sold": false },
 ]
 
-let user_list = [
+let userlist = [
     { id: 1, name: "dasan", notifications: [] },
     { id: 2, name: "vasu", notifications: [] },
 ]
+
+const getData = (key:string) =>{
+
+        let result = localStorage.getItem(key)
+        let resultObj = JSON.parse(result!)
+        return resultObj
+}
+
+const setData = (key:string,value:{}[]) =>{
+
+    try {
+        let result = JSON.stringify(value)
+        localStorage.setItem(key,result)
+    } catch (error){
+        console.log("error setting data from storage")
+    }
+}
+
 
 const MessageContext = createContext({} as contextType)
 
@@ -53,7 +72,7 @@ export const ContentScreen = () => {
 
     const selectUser = async () => {
 
-        let currentUser = user_list.find(user => user.id === Number(refObj.current?.value))!
+        let currentUser = users?.find(user => user.id === Number(refObj.current?.value))!
         setCurrentuser(currentUser)
     }
 
@@ -70,8 +89,12 @@ export const ContentScreen = () => {
             found?.notifications.push(objModel)
         })
 
+        // updating state
         let temp = [...users!]
         setUsers(temp)
+
+        // updating local storage
+        setData("user_list",temp)
     }
 
     const displayMessage = (message: string) => {
@@ -84,8 +107,21 @@ export const ContentScreen = () => {
     }
 
     useEffect(() => {
-        setAuctionitems(auctionItems)
-        setUsers(user_list)
+
+        let auction_items = getData("auction_items")!
+        let user_list = getData("user_list")!
+
+        if(auction_items === null)
+        setData("auction_items",auctionItems)
+        else
+        setAuctionitems(auction_items)
+        
+        if(user_list === null)
+        setData("user_list",userlist)
+        else{
+            setUsers(user_list)
+        }
+
     }, [])
 
     return (
@@ -99,7 +135,7 @@ export const ContentScreen = () => {
                 </select>
             </div>
 
-            <MessageContext.Provider value={{displayMessage}}>
+            <MessageContext.Provider value={{displayMessage, setData}}>
                 <AuctionItems items={auctionitems} setitems={setAuctionitems} onNotify={notify} user={currentuser!} />
                 <AuctionUsers user={currentuser} />
             </MessageContext.Provider>

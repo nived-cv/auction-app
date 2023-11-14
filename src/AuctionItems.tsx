@@ -17,22 +17,22 @@ type mapArgs = {
 type User = {
     id:number
     name:string
-    notifications : {name:string,message:string}[]
+    notifications : {name:string, message:string}[]
 }
 
 type propstype = {
     items : mapArgs[] | null
-    setitems: React.Dispatch<React.SetStateAction<mapArgs[] | null>>
+    setitems: React.Dispatch <React.SetStateAction<mapArgs[] | null>>
     onNotify : (selected: mapArgs,value:number) => void
     user : User
 }
 
 export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
 
-    let [selectedItem,setSelectedItem] = useState<null | mapArgs>(null)
-    const amountObj = useRef<HTMLInputElement>(null)
-    const formObj = useRef<HTMLDivElement>(null)
-    const {displayMessage} = useAuctionContext()
+    let [selectedItem,setSelectedItem] = useState <null | mapArgs> (null)
+    const amountObj = useRef <HTMLInputElement> (null)
+    const formObj = useRef <HTMLDivElement> (null)
+    const {displayMessage, setData} = useAuctionContext()
 
     // making a state variable to store the details of selected item
     const selected = (selectedItem: mapArgs) => {
@@ -57,7 +57,12 @@ export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
                                 bidEnd(selectedItem!)
 
                                 let updateArr = [...items!]
+
+                                //saving state
                                 setitems(updateArr)
+                                //saving local storage
+                                setData("auction_items",updateArr)
+
                                 break;
 
             case "add" :   let found = selectedItem?.current_users.indexOf(user_!)
@@ -65,7 +70,11 @@ export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
 
                                 selectedItem?.current_users.push(user_!)
                                 let updateArr = [...items!]
+
+                                //saving state
                                 setitems(updateArr)
+                                //saving local storage
+                                setData("auction_items",updateArr)
                             }
                             break
         }
@@ -83,8 +92,8 @@ export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
                     selectedItem.current_bid = value
                     selectedItem.bid_person = user!.name
                     handleUsers("add",user)
-                    let new_arr = [...items!]
-                    new_arr && setitems(new_arr)
+                    // let new_arr = [...items!]                // these may not be needed
+                    // new_arr && setitems(new_arr)
 
                     onNotify(selectedItem,value)
                     amountObj.current!.value = ''
