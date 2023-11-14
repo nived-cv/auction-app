@@ -1,46 +1,31 @@
 
-import { useContext, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { AuctionItem } from "./AuctionItem";
 import './css/auction-items-list.css'
 import { useAuctionContext } from "./ContentScreen";
- 
-type mapArgs = {
-
-    id: number
-    name: string
-    current_bid: number
-    bid_person: string | null
-    current_users : User[]
-    sold:boolean
-}
-
-type User = {
-    id:number
-    name:string
-    notifications : {name:string, message:string}[]
-}
+import { AuctionItemType, User } from "./CommonTypes"; 
 
 type propstype = {
-    items : mapArgs[] | null
-    setitems: React.Dispatch <React.SetStateAction<mapArgs[] | null>>
-    onNotify : (selected: mapArgs,value:number) => void
+    items : AuctionItemType[] | null
+    setitems: React.Dispatch <React.SetStateAction<AuctionItemType[] | null>>
+    onNotify : (selected: AuctionItemType,value:number) => void
     user : User
 }
 
 export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
 
-    let [selectedItem,setSelectedItem] = useState <null | mapArgs> (null)
+    let [selectedItem,setSelectedItem] = useState <null | AuctionItemType> (null)
     const amountObj = useRef <HTMLInputElement> (null)
     const formObj = useRef <HTMLDivElement> (null)
     const {displayMessage, setData} = useAuctionContext()
 
     // making a state variable to store the details of selected item
-    const selected = (selectedItem: mapArgs) => {
+    const selected = (selectedItem: AuctionItemType) => {
         setSelectedItem(selectedItem)
         formObj.current!.classList.remove('hide')
     }
     
-    const bidEnd = (details : mapArgs) =>{
+    const bidEnd = (details : AuctionItemType) =>{
 
         details.sold = true
         displayMessage(`${details.name} sold to ${details.bid_person} for ${details.current_bid}`)
@@ -113,7 +98,7 @@ export const AuctionItems = ({items,setitems,onNotify,user}:propstype) => {
 
             <div className="auction-items-list">
 
-                {items?.map((item: mapArgs) => {
+                {items?.map((item: AuctionItemType) => {
                     return <AuctionItem key={item.id} selected={selected} item={item} />
                 })}
 

@@ -1,32 +1,12 @@
 
 import './css/auction-item.css'
 import { useRef } from 'react'
+import { AuctionItemType } from './CommonTypes'
 
-type User = {
-    id:number
-    name:string
-    notifications : {name:string,message:string}[]
-}
-
-type mapArgs = {
-
-    id: number
-    name: string
-    current_bid: number
-    bid_person: string | null
-    current_users : User[]
-    sold : boolean
-}
 
 type props = {
-    item : {id: number
-        name: string
-        current_bid: number
-        bid_person: string | null
-        current_users : User[]
-        sold:boolean
-    }
-    selected : (e : mapArgs) => void
+    item : AuctionItemType
+    selected : (e : AuctionItemType) => void
 }
 
 export const AuctionItem = ({item,selected}: props) =>{

@@ -1,15 +1,9 @@
 
-import { useRef, useState } from 'react'
 import './css/auction-users.css'
-
-type user = {
-    id : number
-    name : string
-    notifications : {name:string,message:string}[]
-}
+import { User } from './CommonTypes'
 
 type args = {
-    user : user | null
+    user : User | null
 }
 
 export const AuctionUsers = ({user}:args) =>{

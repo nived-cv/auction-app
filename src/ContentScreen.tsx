@@ -4,22 +4,7 @@ import { AuctionUsers } from "./AuctionUsers"
 import { useState, useRef, useEffect, useContext } from 'react'
 import './css/content-screen.css'
 import { createContext } from "react"
-
-type user = {
-    id: number
-    name: string
-    notifications: { name: string, message: string }[]
-}
-
-type mapArgs = {
-
-    id: number
-    name: string
-    current_bid: number
-    bid_person: string | null
-    current_users: user[]
-    sold: boolean
-}
+import { User,AuctionItemType } from "./CommonTypes"
 
 type contextType = {
     displayMessage : (message : string) => void
@@ -63,9 +48,9 @@ export const  useAuctionContext = ()=>{
 
 export const ContentScreen = () => {
 
-    const [users, setUsers] = useState<user[] | null>(null)
-    let [currentuser, setCurrentuser] = useState<user | null>(null)
-    let [auctionitems, setAuctionitems] = useState<mapArgs[] | null>(null)
+    const [users, setUsers] = useState<User[] | null>(null)
+    let [currentuser, setCurrentuser] = useState<User | null>(null)
+    let [auctionitems, setAuctionitems] = useState<AuctionItemType[] | null>(null)
     const refObj = useRef<HTMLSelectElement>(null)
     const msgObj = useRef<HTMLSpanElement>(null)
     const msgScreen = useRef<HTMLDivElement>(null)
@@ -76,7 +61,7 @@ export const ContentScreen = () => {
         setCurrentuser(currentUser)
     }
 
-    const notify = (selected: mapArgs, value: number) => {
+    const notify = (selected: AuctionItemType, value: number) => {
 
         let message = `bid ${value} for ${selected.name}`
         let name = currentuser?.name!
