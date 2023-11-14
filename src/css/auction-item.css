@@ -1,0 +1,14 @@
+
+.auction-item{
+    display:flex;
+    flex-direction:column;
+    padding:15px;
+    border-radius: 10px;
+    background-color: beige;
+}
+
+.auction-item.sold{
+    background-color: rgba(0,0,0,0.1);
+    border:none;
+    pointer-events: none;
+}
